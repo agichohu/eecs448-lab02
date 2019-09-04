@@ -43,9 +43,9 @@ bool LinkedList<T>::search(T value) const
 	*/
 	while(temp!=nullptr)
 	{
-		if(temp->getEntry()==value)
+		if(temp->getValue()==value)
 		{
-			isFound==true;
+			isFound=true;
 		}
 	}
 
@@ -106,6 +106,24 @@ bool LinkedList<T>::removeBack()
 	Node<T>* lastNode = nullptr;
 	Node<T>* secondintoLast = nullptr;
 	bool isRemoved = false;
+	Node<T>* temp = m_front;
+	int ogSize=m_size;
+
+	while(temp->getNext()->getNext())
+	{
+		temp=temp->getNext();
+	}
+
+	secondintoLast=temp;
+	lastNode=temp->getNext();
+
+	delete(lastNode);
+	secondintoLast->setNext(nullptr);
+
+	if(m_size<ogSize)
+	{
+		isRemoved=true;
+	}
 
 	/** TODO 
 		Fix this method
