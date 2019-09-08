@@ -113,22 +113,28 @@ bool LinkedList<T>::removeBack()
 		Node<T>* temp = m_front;
 		int ogSize=m_size;
 
-		while(temp->getNext())
+		if(!m_front->getNext())
 		{
-			temp=temp->getNext();
-		}
-			
-			secondintoLast=temp;
-			lastNode=temp->getNext();
-
-			delete lastNode;
-
-			lastNode= secondintoLast;
-
-			lastNode->setNext(nullptr);
-
+			delete(m_front);
 			m_size--;
+		}
+		else
+		{
+			secondintoLast = m_front;
+			while(secondintoLast->getNext()->getNext())
+			{
+				secondintoLast = secondintoLast->getNext();
+			}
+
+			lastNode = secondintoLast->getNext();
+			
+			delete(lastNode);
+
+			secondintoLast->setNext(nullptr);
+			m_size--;
+		}
 		
+
 
 		
 
